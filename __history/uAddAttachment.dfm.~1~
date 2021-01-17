@@ -1,0 +1,40 @@
+inherited AddAttachment: TAddAttachment
+  Caption = 'Dodaj za'#322#261'cznik'
+  ClientHeight = 484
+  ExplicitHeight = 523
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited btnSaveOk: TBitBtn
+    Top = 444
+    Caption = 'Dodaj'
+  end
+  inherited btnCancel: TBitBtn
+    Top = 444
+  end
+  inherited gbMain: TGroupBox
+    Height = 436
+    inherited lvMain: TAdvListView
+      Height = 343
+      ExplicitHeight = 343
+    end
+    inherited cbAuditType: TAdvDBLookupComboBox
+      Top = 399
+      ExplicitTop = 399
+    end
+    inherited btnAdd: TBitBtn
+      Top = 395
+      Visible = False
+    end
+    inherited btnDelete: TBitBtn
+      Top = 395
+      Visible = False
+    end
+    inherited btnEdit: TBitBtn
+      Top = 395
+      Visible = False
+    end
+  end
+  inherited STipsPopupMain: TScreenTipsPopup
+    Top = 451
+  end
+end

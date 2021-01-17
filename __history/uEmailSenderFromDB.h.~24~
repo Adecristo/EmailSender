@@ -1,0 +1,93 @@
+﻿//---------------------------------------------------------------------------
+
+#ifndef uEmailSenderFromDBH
+#define uEmailSenderFromDBH
+//---------------------------------------------------------------------------
+#endif
+
+
+#include <FireDAC.Comp.Client.hpp>
+#include <FireDAC.Comp.DataSet.hpp>
+#include <FireDAC.DApt.hpp>
+#include <FireDAC.DApt.Intf.hpp>
+#include <FireDAC.DatS.hpp>
+#include <FireDAC.Phys.Intf.hpp>
+#include <FireDAC.Stan.Async.hpp>
+#include <FireDAC.Stan.Error.hpp>
+#include <FireDAC.Stan.Intf.hpp>
+#include <FireDAC.Stan.Option.hpp>
+#include <FireDAC.Stan.Param.hpp>
+#include <FireDAC.Comp.UI.hpp>
+#include <FireDAC.UI.Intf.hpp>
+#include <FireDAC.VCLUI.Wait.hpp>
+#include "uEmailInterface.h"
+
+class TEmailDB : public TCppInterfacedObject<IMailer> {
+ private:
+	String	_SmtpServer,
+			_SmtpLogin,
+			_SmtpPassword,
+			_EmailFrom,
+			_Subject,
+			_EmailBodyTXT,
+			_EmailBodyHTML,
+			_Encoding;
+	int 	_SmtpPort, _MailID, _MailIndex;
+	TStringList * _EmailToAdressList, *_AttachmentList;
+	TIdMessageBuilderHtml * _Builder;
+	TFDQuery *fdqMain;
+
+ public:
+	String GetSmtpServer();
+	bool SetSmtpServer(String SmtpServer);
+
+	String GetSmtpLogin();
+	bool SetSmtpLogin(String SmtpLogin);
+
+	String GetSmtpPassword();
+	bool SetSmtpPassword(String SmtpPassword);
+
+	int GetSmtpPort();
+	bool SetSmtpPort(int SmtpPort);
+
+	String GetEmailFrom();
+	bool SetEmailFrom(String EmailFrom);
+
+	TStringList * GetEmailTo();
+	bool SetEmailTo(TStringList * EmailToList);
+	bool AddEmailTo(String EmailTo);
+
+	String GetSubject();
+	bool SetSubject(String Subject);
+
+	String GetEmailBodyTXT();
+	bool SetEmailBodyTXT(String EmailBodyTXT);
+
+	String GetEmailBodyHTML();
+	bool SetEmailBodyHTML(String EmailBodyHTML);
+
+	String GetBodyEncoding();
+	bool SetBodyEncoding(String Encoding);
+
+	TIdMessageBuilderHtml * GetMessageBuilder();
+	bool SetMessageBuilder(TIdMessageBuilderHtml * Builder);
+	bool IsMessageBuilderPresent();
+
+	bool EmailSent(int Index, bool IsSendSuccesful);
+
+	bool BeforeEmailSend();
+
+	int GetEmailId();
+
+	void LoadEmail(int MailID);
+	void SaveEmailToBase();
+
+	String ParseScript(String strm);
+
+	TEmailDB(int MailID = 0);
+
+	__property int MailIndex = {read = _MailIndex, write = _MailIndex};
+
+
+	//~TEmailDB();
+};
